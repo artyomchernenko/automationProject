@@ -9,6 +9,7 @@ public class LaptopPage extends BasePage{
 	public LaptopPage(WebDriver driver) {
 		super(driver);
 	}
+	
 	@FindBy(css = "#input-quantity")
 	private WebElement quantityField;
 	@FindBy(css = "#button-cart")
@@ -39,43 +40,57 @@ public class LaptopPage extends BasePage{
 	private WebElement SendReviewBtn;
 	@FindBy(css = "div.alert.alert-success.alert-dismissible > a:nth-child(3)")
 	private WebElement enterCoparisonBtn;
+	@FindBy(css = "ul.nav.nav-tabs > li.active > a")
+	private WebElement specificationLable;
+	@FindBy(css = ".alert.alert-success.alert-dismissible")
+	private WebElement sentReviewLable;
+	@FindBy(css = "ul.thumbnails > li:nth-child(3) > a > img")
+	private WebElement checkPicture;
 
+	//Choose quantity of laptops
 	public void chooseQuantityOfLaptops(String quantity) {
 		highlightElement(quantityField, "yellow");
 		quantityField.clear();
 		quantityField.sendKeys(quantity);
-
 	}
-
+	
+	//Choose delivery date
 	public void chooseDeliveryDate(String deliveryDate) {
-		highlightElement(quantityField, "yellow");
+		highlightElement(quantityField, "lime");
 		deliveryDateField.clear();
 		deliveryDateField.sendKeys(deliveryDate);
 	}
-
+	
+	//Add to cart
 	public void addToCart() {
 		click(addToCartBtn);
 	}
-
+	
+	//Open Cart
 	public void openCart() {
 		click(clickOnCart);
 		click(clickOnViewCart);
 	}
+	
+	//See the poctures of the laptop
 	public void seePhotosOfTheLaptop() {
 		click(pictureBtn);
-		sleep(1000);
+		sleep(700);
 		click(rightArrowBtn);
-		sleep(1000);
+		sleep(700);
 		click(rightArrowBtn);
-		sleep(1000);
+		sleep(700);
 		click(rightArrowBtn);
 		click(closePhotosBtn);
 	}
+	
+	//See the specification
 	public void seeSpecification() {
 		click(seeSpecificationBtn);
-
 	}
-	public void writeRevew(String yourName, String reviewText) {
+	
+	//Write review
+	public void writeReview(String yourName, String reviewText) {
 		click(revewsBtn);
 		fillText(yourNameField, yourName);
 		sleep(700);
@@ -85,10 +100,30 @@ public class LaptopPage extends BasePage{
 		sleep(700);
 		click(SendReviewBtn);
 	}
+	
+	//Enter Comparison page
 	public void enterComparisonPage() {
 		click(enterCoparisonBtn);
-
 	}
-
+	
+	//Validation
+	public String specificationLable() {
+		return getText(specificationLable);
+	}
+	
+	//Validation
+	public String sentReviewLable() {
+		waitForElementToBeVisible(sentReviewLable);
+		return getText(sentReviewLable);
+	}
+	
+	//Validation
+	public boolean checkIfPictureIsClickable() {
+		waitForElementToBeVisible(checkPicture);
+		if (checkPicture.isDisplayed()) {
+			return true;
+		}
+		return false;
+	}
 }
 

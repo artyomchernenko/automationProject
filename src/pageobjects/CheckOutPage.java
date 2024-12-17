@@ -6,7 +6,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class CheckOutPage extends BasePage{
@@ -15,6 +14,7 @@ public class CheckOutPage extends BasePage{
 	public CheckOutPage(WebDriver driver) {
 		super(driver);
 	}
+	
 	@FindBy(css = ".radio [value='new']")
 	private WebElement newAddressBtn;
 	@FindBy(css = "#input-payment-firstname")
@@ -61,8 +61,11 @@ public class CheckOutPage extends BasePage{
 	private WebElement confirmOrderBtn;
 	@FindBy(css = "#collapse-shipping-address > div > form > div:nth-child(3) > label")
 	private WebElement newDeliveryBtn;
+	@FindBy(css = "#content > h1")
+	private WebElement sanitySucsessLable;
 
-	public void fillBillingDetails(String firstName, String lastName, String address, 
+	//Fill the billing details
+	public void fillBillingDetails(String firstName, String lastName, String address,
 			String city, String postCode, String country, String region) {
 		click(newAddressBtn);
 		fillText(firstNameField, firstName);
@@ -75,8 +78,9 @@ public class CheckOutPage extends BasePage{
 		selectByVisibleText(regionField, region);
 		click(continueBtn);
 	}
-
-	public void fillDeliveryDetails(String firstName, String lastName, String address, 
+	
+	//Fill the delivery details
+	public void fillDeliveryDetails(String firstName, String lastName, String address,
 			String city, String postCode, String country, String region) {
 		click(newDeliveryBtn);
 		fillText(deliveryFirstNameField, firstName);
@@ -89,17 +93,28 @@ public class CheckOutPage extends BasePage{
 		selectByVisibleText(deliveryRegionField, region);
 		click(continueBtnDelivery);
 	}
-
+	
+	//Fill the message for delivery
 	public void fillMesageDeliveryField(String text) {
 		waitForElementToBeVisible(deliveryMessageField);
 		fillText(deliveryMessageField, text);
 		click(deliveryMessageBtn);
 	}
+	
+	//Agree to the Terms and Conditions
 	public void agreeToTheTermsAndConditions() {
 		click(agreeCheckBox);
 		click(continuePaymentBtn);
 	}
+	
+	//Confirm Order
 	public void confirmOrder() {
 		click(confirmOrderBtn);
+	}
+	
+	//Validation
+	public String getSanitySucsessLable() {
+		sleep(500);
+		return getText(sanitySucsessLable);
 	}
 }

@@ -1,14 +1,18 @@
 package tests;
 
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class ContactUsTests extends BaseTest{
-	
 
-	@Test 
-	//Fill the Contact Us Form
+
+	@Test(description = "Fill the Contact Us Form")
 	public void tc01_fillTheContuctUsForm() {
 		mainPage.fillContactUsForm("Artyom", "aptem1986@mail.ru", "Your Site Is good!!!");
+		//Validation
+		String expected = "Contact Us";
+		String actual = mainPage.contactUsLable();
+		Assert.assertEquals(actual, expected);
 	}
 
 }

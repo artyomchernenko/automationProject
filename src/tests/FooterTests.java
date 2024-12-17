@@ -1,34 +1,45 @@
 package tests;
 
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import pageobjects.MainPage;
-
 public class FooterTests extends BaseTest{
-	
-	@Test
-	//Click on About Us
+
+	@Test(description = "Click on About Us")
 	public void tc01_choseAboutUs() {
-	mainPage.choseAboutUs();
+		mainPage.choseAboutUs();
+		//Validation
+		String expected = "About Us";
+		String actual = mainPage.aboutUsLable();
+		Assert.assertEquals(actual, expected);
 	}
 	
-	@Test
-	//Click on Choose Delivery Information
+	@Test(description = "Click on Choose Delivery Information")
 	public void tc02_choseDeliveryInformation() {
-	mainPage.choseDeliveryInformation();
+		mainPage.choseDeliveryInformation();
+		//Validation
+		String expected = "Delivery Information";
+		String actual = mainPage.chooseDeliveryInfoLable();
+		Assert.assertEquals(actual, expected);
+
 	}
 	
-	@Test
-	//Click on Privacy Policy
+	@Test(description = "Click on Privacy Policy")
 	public void tc03_chosePrivacyPolicy() {
-	mainPage.chosePrivacyPolicy();
+		mainPage.chosePrivacyPolicy();
+		//Validation
+		String expected = "Privacy Policy";
+		String actual = mainPage.privacyPolicyLable();
+		Assert.assertEquals(actual, expected);
+
 	}
 	
-	@Test
-	//Click on Term Conditions
+	@Test(description = "Click on Term Conditions")
 	public void tc04_coseTermConditions() {
-	mainPage.choseTermsConditions();
+		mainPage.choseTermsConditions();
+		//Validation
+		String expected = "Terms & Conditions";
+		String actual = mainPage.termConditionsLable();
+		Assert.assertEquals(actual, expected);
 	}
-
-
 }
